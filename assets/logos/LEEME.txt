@@ -1,0 +1,49 @@
+LOGOS DE MARCAS — cinta infinita
+=================================
+
+Los 7 logos estan completos. Nombres exactos:
+
+  wevia.png
+  club-house.png
+  maria-pasion.png
+  el-dorado.png
+  tienda-volar.png
+  tienda-inglesa.png
+  nespresso.png
+
+Pintelux se quito de la cinta (en index.html ya no figura).
+
+NOTA SOBRE EL DORADO
+El archivo que llego era una version monocroma (logo gris claro sobre
+fondo gris), que sobre la tarjeta blanca no se leia. Lo recorte y lo
+pase a rojo #C8102E, que es el color de marca de El Dorado. Si
+conseguis el archivo oficial, reemplaza el-dorado.png y listo, no hay
+que tocar nada mas.
+
+_originales/
+  Los archivos tal como llegaron. El sitio NO los usa. Quedan por si
+  hay que rehacer algun recorte.
+
+ESTILO
+Cada logo va adentro de una tarjeta blanca con esquinas redondeadas,
+a full color. Los PNG estan recortados al borde del logo y pesan entre
+8 y 23 KB cada uno.
+
+REQUISITOS SI AGREGAS OTRA MARCA
+- PNG de 220-300 px de alto (el sitio los muestra a 54 px).
+- Fondo blanco o transparente: la tarjeta ya es blanca, da igual.
+- Recorta el margen vacio, si no se ve mas chico que los demas.
+- Menos de 60 KB. Si pesa mas, quantizalo o usa squoosh.app
+- Si conseguis un SVG, mejor: mismo nombre, y cambia ".png" por ".svg"
+  en index.html (en las DOS listas).
+
+AJUSTES RAPIDOS
+En styles.css, bloque ".brands":
+  --logo-h      alto de los logos (52px)
+  --logo-gap    aire entre logos (72px)
+  --logo-speed  velocidad, mas alto = mas lento (42s)
+La cinta se frena mientras tenes el mouse encima.
+
+AGREGAR O SACAR UNA MARCA
+En index.html, seccion "MARCAS", hay DOS listas identicas.
+Edita las dos igual, si no el loop queda desparejo.

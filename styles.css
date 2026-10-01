@@ -1,0 +1,969 @@
+/* ============================================================
+   PORTFOLIO GABRIELA CANAVERO — hoja de estilos
+   Organizada de arriba hacia abajo, en el mismo orden que el HTML.
+   Para cambiar colores o tamaños, tocá solo el bloque :root.
+   ============================================================ */
+
+/* ---------- 1. Variables ---------- */
+:root {
+  /* Colores */
+  --base:    #FFFBF9;  /* fondo blanco cálido */
+  --ink:     #2E2620;  /* texto principal */
+  --coral:   #FF8577;  /* acento: CTAs, hovers, números clave */
+  --peach:   #F6D9CE;  /* tarjetas de resultados */
+  --sage:    #CFE3D6;  /* fondo de caso, métricas de crecimiento */
+  --muted:   #A89C93;  /* labels, captions, metadata */
+  --line:    #E7DAD2;  /* líneas finas */
+
+  /* Tipografías */
+  --display: "Fraunces", Georgia, serif;
+  --body:    "Inter", system-ui, -apple-system, sans-serif;
+  --mono:    "IBM Plex Mono", ui-monospace, monospace;
+
+  /* Ritmo vertical y ancho de página */
+  --pad-y:   88px;      /* alto de las secciones (crece en desktop) */
+  --gutter:  22px;      /* margen lateral */
+  --max:     1120px;    /* ancho máximo del contenido */
+}
+
+/* ---------- 2. Base ---------- */
+* { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  background: var(--base);
+  color: var(--ink);
+  font-family: var(--body);
+  font-size: 17px;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+img { max-width: 100%; display: block; }
+
+/* Al saltar a una sección desde el nav, dejamos aire para la barra sticky */
+section[id] { scroll-margin-top: 72px; }
+
+a { color: inherit; }
+
+/* Foco de teclado visible en todo el sitio */
+:focus-visible {
+  outline: 2px solid var(--coral);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+.sr-only {
+  position: absolute; width: 1px; height: 1px;
+  padding: 0; margin: -1px; overflow: hidden;
+  clip: rect(0 0 0 0); white-space: nowrap; border: 0;
+}
+
+/* Link para saltar al contacto (aparece solo con teclado) */
+.skip {
+  position: absolute; left: -9999px; top: 12px; z-index: 50;
+  background: var(--ink); color: var(--base);
+  padding: 10px 16px; border-radius: 999px; font-size: 14px;
+}
+.skip:focus { left: 12px; }
+
+/* Micro-label en mono: se usa en varias secciones */
+.label {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin: 0 0 14px;
+}
+
+.mono {
+  font-family: var(--mono);
+  font-variant-numeric: tabular-nums;
+}
+
+/* ---------- 3. Barra de progreso de scroll ---------- */
+.progress {
+  position: fixed; inset: 0 0 auto 0; height: 3px; z-index: 40;
+  background: transparent; pointer-events: none;
+}
+.progress__bar {
+  display: block; height: 100%; width: 0%;
+  background: var(--coral);
+}
+
+/* ---------- 4. Nav ---------- */
+.nav {
+  position: sticky; top: 0; z-index: 30;
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 16px;
+  padding: 14px var(--gutter);
+  background: rgba(255, 251, 249, .88);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--line);
+}
+.nav__name {
+  font-family: var(--display);
+  font-weight: 600;
+  font-size: 17px;
+  text-decoration: none;
+  letter-spacing: -.01em;
+}
+.nav__links {
+  display: flex; align-items: center; gap: 20px;
+  font-size: 14px;
+}
+/* El subrayado vive en ::after y crece desde la izquierda.
+   Se enciende en dos casos: hover, o sección activa (.is-active,
+   que pone el scrollspy de script.js). */
+.nav__links a {
+  position: relative;
+  text-decoration: none;
+  color: var(--muted);
+  padding-bottom: 3px;
+  transition: color .2s ease;
+}
+.nav__links a::after {
+  content: "";
+  position: absolute; left: 0; right: 0; bottom: 0;
+  height: 2px;
+  background: var(--coral);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform .35s cubic-bezier(.19, 1, .22, 1);
+}
+.nav__links a:hover,
+.nav__links a.is-active { color: var(--ink); }
+.nav__links a:hover::after,
+.nav__links a.is-active::after { transform: scaleX(1); }
+/* En mobile escondemos los links intermedios, queda solo Contacto */
+@media (max-width: 600px) {
+  .nav__links a:not(.nav__cta) { display: none; }
+}
+
+/* ---------- 5. Hero ---------- */
+.hero {
+  min-height: calc(100vh - 56px);
+  display: flex; flex-direction: column; justify-content: center;
+  padding: 64px var(--gutter) 40px;
+}
+.hero__inner {
+  width: 100%; max-width: var(--max); margin: 0 auto;
+}
+
+.hero__eyebrow {
+  display: inline-flex; align-items: center; gap: 9px;
+  font-family: var(--mono);
+  font-size: 12px; letter-spacing: .04em;
+  color: var(--muted);
+  margin: 0 0 28px;
+}
+.dot {
+  width: 7px; height: 7px; border-radius: 50%;
+  background: var(--coral);
+  flex: none;
+}
+
+.hero__title {
+  font-family: var(--display);
+  font-weight: 600;
+  /* 75% del tamaño original (era clamp(52px, 13vw, 148px)) */
+  font-size: clamp(39px, 9.75vw, 111px);
+  line-height: .92;
+  letter-spacing: -.035em;
+  margin: 0 0 26px;
+  font-variation-settings: "opsz" 144;
+}
+
+.hero__role {
+  font-family: var(--mono);
+  font-size: 13px;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  color: var(--ink);
+  margin: 0 0 30px;
+  padding-top: 18px;
+  border-top: 1px solid var(--line);
+}
+
+.hero__lead {
+  font-family: var(--display);
+  font-weight: 400;
+  font-size: clamp(21px, 3.4vw, 30px);
+  line-height: 1.35;
+  max-width: 20ch;
+  margin: 0 0 34px;
+}
+.hero__lead em {
+  font-style: normal;
+  color: var(--coral);
+}
+
+.hero__chips {
+  list-style: none; display: flex; flex-wrap: wrap; gap: 8px;
+  padding: 0; margin: 0;
+}
+.hero__chips li {
+  font-family: var(--mono);
+  font-size: 11.5px;
+  letter-spacing: .04em;
+  padding: 6px 12px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  color: var(--muted);
+}
+
+.hero__scroll {
+  width: 100%; max-width: var(--max); margin: 56px auto 0;
+  font-family: var(--mono);
+  font-size: 11px; letter-spacing: .12em; text-transform: uppercase;
+  color: var(--muted);
+}
+
+@media (min-width: 768px) {
+  .hero__lead { max-width: 26ch; }
+}
+
+/* ---------- 6. Sobre ella ---------- */
+.about {
+  padding: var(--pad-y) var(--gutter);
+  background: var(--peach);
+}
+.about__grid {
+  max-width: var(--max); margin: 0 auto;
+  display: grid; gap: 34px;
+}
+.about__photo { margin: 0; }
+.about__photo img {
+  width: 100%; height: auto;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+  background: var(--base);   /* se ve si todavía no cargaste la foto */
+  border-radius: 3px;
+}
+.about__photo figcaption {
+  font-family: var(--mono);
+  font-size: 11px; letter-spacing: .08em;
+  color: var(--muted);
+  margin-top: 10px;
+}
+.about__body {
+  font-size: 18px;
+  line-height: 1.7;
+  margin: 0 0 18px;
+  max-width: 56ch;
+}
+.about__body:last-child { margin-bottom: 0; }
+
+@media (min-width: 900px) {
+  .about__grid {
+    grid-template-columns: 5fr 7fr;
+    gap: 60px;
+    align-items: center;
+  }
+}
+
+/* ---------- 7. Casos (carrusel de tarjetas) ---------- */
+.cases {
+  background: var(--sage);
+  padding: var(--pad-y) var(--gutter);
+}
+.cases__inner { max-width: var(--max); margin: 0 auto; }
+
+.cases__head {
+  display: flex; flex-wrap: wrap; align-items: baseline;
+  justify-content: space-between; gap: 10px;
+  margin-bottom: 26px;
+}
+.cases__head .label { margin: 0; }
+/* La tarjeta: papel blanco apoyado sobre el verde salvia */
+.ccard {
+  background: var(--base);
+  border-radius: 6px;
+  padding: 34px 26px;
+  box-shadow: 0 2px 0 rgba(46, 38, 32, .07);
+  animation: card-in .45s ease both;
+}
+.ccard__grid { display: grid; gap: 34px; }
+
+/* Adentro de la tarjeta el recibo no necesita quedarse pegado */
+.ccard .receipt { position: static; }
+
+@media (min-width: 900px) {
+  .ccard { padding: 52px 48px; }
+  .ccard__grid {
+    grid-template-columns: 1.15fr .85fr;
+    gap: 52px;
+    align-items: start;
+  }
+}
+
+/* Respaldo estático sin React */
+.cases__fallback { display: grid; gap: 40px; }
+
+/* --- Tipografía compartida por la tarjeta y el respaldo --- */
+.case__meta {
+  display: flex; flex-wrap: wrap; align-items: baseline; gap: 12px;
+  font-family: var(--mono);
+  font-size: 11.5px; letter-spacing: .08em; text-transform: uppercase;
+  margin: 0 0 18px;
+}
+.case__co { color: var(--ink); }
+.case__dates { color: var(--muted); }
+
+.case__title {
+  font-family: var(--display);
+  font-weight: 600;
+  font-size: clamp(30px, 5.2vw, 46px);
+  line-height: 1.08;
+  letter-spacing: -.025em;
+  margin: 0 0 20px;
+  max-width: 15ch;
+}
+
+.case__lead {
+  font-size: 18px;
+  line-height: 1.65;
+  margin: 0 0 26px;
+  max-width: 52ch;
+}
+
+.case__actions {
+  list-style: none; padding: 0; margin: 0;
+  max-width: 52ch;
+}
+.case__actions li {
+  position: relative;
+  padding: 12px 0 12px 22px;
+  border-top: 1px solid var(--line);
+  font-size: 15.5px;
+  line-height: 1.6;
+}
+.case__actions li::before {
+  content: "";
+  position: absolute; left: 0; top: 21px;
+  width: 8px; height: 1px;
+  background: var(--coral);
+}
+
+/* Controles del carrusel sobre fondo salvia */
+.cases .carousel__nav { border-top-color: rgba(46, 38, 32, .2); }
+.cases .carousel__dot { background: rgba(46, 38, 32, .2); }
+.cases .carousel__dot.is-active { background: var(--coral); }
+
+/* ---------- 8. Ticker de resultados (elemento firma) ---------- */
+.receipt {
+  background: var(--peach);
+  border-radius: 4px;
+  padding: 26px 24px 22px;
+  box-shadow: 0 1px 0 rgba(46, 38, 32, .06);
+}
+/* Sobre fondo durazno (nunca pasa hoy, pero por si cambiás el orden) */
+.case--peach .receipt { background: var(--base); }
+
+@media (min-width: 900px) {
+  .receipt { position: sticky; top: 92px; }
+}
+
+.receipt__head {
+  display: flex; justify-content: space-between; align-items: baseline;
+  gap: 12px;
+  padding-bottom: 16px;
+  border-bottom: 1px dashed rgba(46, 38, 32, .25);
+}
+.receipt__label {
+  font-family: var(--mono);
+  font-size: 11px; letter-spacing: .12em; text-transform: uppercase;
+}
+.receipt__ref {
+  font-family: var(--mono);
+  font-size: 11px; letter-spacing: .06em;
+  color: var(--muted);
+}
+
+.receipt__items { list-style: none; padding: 0; margin: 0; }
+
+.metric {
+  padding: 18px 0;
+  border-bottom: 1px dashed rgba(46, 38, 32, .18);
+}
+.metric:last-child { border-bottom: 0; }
+
+.metric__label {
+  display: block;
+  font-size: 13px;
+  line-height: 1.45;
+  color: rgba(46, 38, 32, .72);
+  margin-bottom: 6px;
+}
+
+.metric__value {
+  display: block;
+  font-family: var(--mono);
+  font-variant-numeric: tabular-nums;
+  font-weight: 600;
+  font-size: clamp(30px, 6vw, 40px);
+  line-height: 1.05;
+  letter-spacing: -.02em;
+  color: var(--coral);
+  min-height: 1em;
+}
+
+/* Métrica todavía sin dato: chip discreto, no un número inventado */
+.metric__value--pending {
+  display: inline-block;
+  font-size: 12px;
+  font-weight: 400;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--muted);
+  border: 1px dashed var(--muted);
+  border-radius: 999px;
+  padding: 5px 12px;
+}
+
+/* Etiqueta "confirmado" al lado del label */
+.tag {
+  display: inline-block;
+  font-family: var(--mono);
+  font-size: 9.5px; letter-spacing: .1em; text-transform: uppercase;
+  color: var(--ink);
+  background: var(--sage);
+  border-radius: 3px;
+  padding: 2px 6px;
+  margin-left: 6px;
+  vertical-align: 1px;
+}
+.case--sage .tag { background: var(--base); }
+
+.receipt__rule {
+  height: 1px;
+  background: repeating-linear-gradient(90deg, rgba(46,38,32,.35) 0 4px, transparent 4px 8px);
+  margin-top: 6px;
+}
+.receipt__foot {
+  display: flex; justify-content: space-between; align-items: baseline;
+  padding-top: 14px;
+  font-family: var(--mono);
+  font-size: 11px; letter-spacing: .08em; text-transform: uppercase;
+  color: var(--muted);
+}
+
+/* ============================================================
+   8c. TOTAL ACUMULADO
+   Es la línea de total del ticket: cierra los tres casos con
+   una regla doble arriba, igual que el subtotal de un recibo.
+   ============================================================ */
+.total {
+  background: var(--peach);
+  padding: 64px var(--gutter);
+}
+.total__inner { max-width: var(--max); margin: 0 auto; }
+
+.total__head {
+  display: flex; justify-content: space-between; align-items: baseline;
+  gap: 12px;
+  padding-bottom: 18px;
+}
+/* Regla doble: el gesto de "acá se suma todo" */
+.total__grid {
+  border-top: 3px double rgba(46, 38, 32, .45);
+  padding-top: 30px;
+  display: grid;
+  gap: 30px;
+}
+.total__item {
+  display: flex; flex-direction: column; gap: 10px;
+}
+.total__label {
+  font-family: var(--mono);
+  font-size: 11px; letter-spacing: .12em; text-transform: uppercase;
+  color: rgba(46, 38, 32, .65);
+}
+.total__value {
+  font-size: clamp(44px, 9vw, 68px);
+  letter-spacing: -.035em;
+}
+/* El chip de "pendiente" no debe crecer con el número */
+.total__value.metric__value--pending {
+  font-size: 12px;
+  letter-spacing: .1em;
+  align-self: flex-start;
+}
+
+@media (min-width: 768px) {
+  .total { padding: 88px var(--gutter); }
+  .total__grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 40px;
+  }
+  /* Separadores punteados entre columnas */
+  .total__item + .total__item {
+    border-left: 1px dashed rgba(46, 38, 32, .28);
+    padding-left: 40px;
+  }
+}
+
+/* ============================================================
+   8b. CINTA DE HERRAMIENTAS — componente React
+   El riel contiene la lista dos veces y se desplaza un 50%,
+   así el loop no tiene salto visible.
+   ============================================================ */
+.band {
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  background: var(--base);
+  overflow: hidden;
+}
+.band__track {
+  display: flex;
+  width: max-content;
+  animation: band-scroll 34s linear infinite;
+}
+.band:hover .band__track { animation-play-state: paused; }
+
+.band__list {
+  display: flex; align-items: center;
+  flex: none;
+  list-style: none; margin: 0; padding: 0;
+}
+.band__item {
+  display: flex; align-items: center;
+  height: 66px;
+  padding: 0 28px;
+  font-family: var(--mono);
+  font-size: 12.5px;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  color: var(--ink);
+}
+/* Punto coral como separador entre herramientas */
+.band__item::after {
+  content: "";
+  width: 5px; height: 5px;
+  border-radius: 50%;
+  background: var(--coral);
+  margin-left: 28px;
+}
+
+@keyframes band-scroll {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+/* Respaldo estático (se ve solo si React no carga) */
+.band__fallback {
+  display: flex; flex-wrap: wrap; gap: 8px 28px;
+  list-style: none;
+  margin: 0; padding: 22px var(--gutter);
+  font-family: var(--mono);
+  font-size: 12.5px; letter-spacing: .14em; text-transform: uppercase;
+  color: var(--muted);
+}
+
+/* ============================================================
+   8d. MARCAS — cinta infinita de logos
+   Mismo truco que la cinta de herramientas: dos copias de la
+   lista y el riel se mueve un 50%.
+   Para ajustar el look, tocá solo estas tres variables.
+   ============================================================ */
+.brands {
+  --logo-h:     54px;   /* alto máximo del logo dentro de la tarjeta */
+  --card-w:     206px;  /* ancho de la tarjeta blanca */
+  --card-h:     104px;  /* alto de la tarjeta blanca */
+  --logo-gap:   24px;   /* aire entre tarjetas */
+  --logo-speed: 46s;    /* más alto = más lento */
+
+  background: var(--base);
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  padding: 54px 0;
+  overflow: hidden;
+}
+
+.brands__label {
+  margin: 0 var(--gutter) 34px;
+}
+
+/* Degradado en los bordes: los logos aparecen y desaparecen */
+.brands__viewport {
+  overflow: hidden;
+  /* aire arriba y abajo para que el hover pueda levantar la tarjeta
+     y la sombra no quede cortada */
+  padding: 14px 0;
+  margin: -14px 0;
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 7%, #000 93%, transparent);
+          mask-image: linear-gradient(90deg, transparent, #000 7%, #000 93%, transparent);
+}
+
+.brands__track {
+  display: flex;
+  width: max-content;
+  animation: brands-scroll var(--logo-speed) linear infinite;
+}
+.brands:hover .brands__track { animation-play-state: paused; }
+
+@keyframes brands-scroll {
+  from { transform: translate3d(0, 0, 0); }
+  to   { transform: translate3d(-50%, 0, 0); }
+}
+
+.brands__list {
+  display: flex; align-items: center;
+  gap: var(--logo-gap);
+  padding: 0 0 0 var(--logo-gap);   /* mantiene el aire en la costura */
+  margin: 0;
+  list-style: none;
+  flex: none;
+}
+
+/* Cada logo va en su propia tarjeta blanca con esquinas redondeadas.
+   Los logos se ven a full color: la tarjeta les da el fondo limpio
+   que necesitan y los empareja aunque vengan en formatos distintos. */
+.brands__item {
+  flex: none;
+  display: flex; align-items: center; justify-content: center;
+  width: var(--card-w);
+  height: var(--card-h);
+  padding: 18px 26px;
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  box-shadow: 0 1px 2px rgba(46, 38, 32, .05);
+  transition: transform .3s cubic-bezier(.19, 1, .22, 1),
+              box-shadow .3s ease,
+              border-color .3s ease;
+}
+.brands__item:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 24px rgba(46, 38, 32, .10);
+  border-color: var(--coral);
+}
+
+.brands__item img {
+  max-height: var(--logo-h);
+  max-width: 100%;
+  width: auto; height: auto;
+  object-fit: contain;
+}
+
+/* Si todavía no cargaste el PNG, el script deja el nombre en texto */
+.brands__name {
+  font-family: var(--display);
+  font-weight: 600;
+  font-size: 21px;
+  line-height: 1.15;
+  letter-spacing: -.02em;
+  text-align: center;
+  color: var(--ink);
+  transition: color .3s ease;
+}
+.brands__item:hover .brands__name { color: var(--coral); }
+
+@media (max-width: 700px) {
+  .brands {
+    --logo-h: 40px; --card-w: 158px; --card-h: 82px;
+    --logo-gap: 16px; --logo-speed: 30s;
+    padding: 40px 0;
+  }
+  .brands__item { padding: 14px 20px; border-radius: 13px; }
+  .brands__name { font-size: 16px; }
+}
+
+/* ---------- 9. Recomendaciones ---------- */
+.quotes {
+  padding: var(--pad-y) var(--gutter);
+  max-width: var(--max);
+  margin: 0 auto;
+}
+.quotes__head {
+  display: flex; flex-wrap: wrap; align-items: baseline;
+  justify-content: space-between; gap: 10px;
+  margin-bottom: 40px;
+}
+.quotes__head .label { margin: 0; }
+.quotes__source {
+  font-family: var(--mono);
+  font-size: 11px; letter-spacing: .1em; text-transform: uppercase;
+  color: var(--muted);
+  margin: 0;
+}
+.quotes__grid {
+  display: grid; gap: 28px;
+}
+.quote {
+  margin: 0;
+  padding-top: 24px;
+  border-top: 2px solid var(--ink);
+}
+.quote blockquote {
+  margin: 0 0 20px;
+  font-family: var(--display);
+  font-weight: 400;
+  font-size: clamp(19px, 2.4vw, 23px);
+  line-height: 1.45;
+  letter-spacing: -.01em;
+}
+.quote blockquote::before { content: "“"; color: var(--coral); }
+.quote blockquote::after  { content: "”"; color: var(--coral); }
+.quote figcaption {
+  display: flex; flex-direction: column; gap: 2px;
+  font-family: var(--mono);
+  font-size: 11.5px; letter-spacing: .05em;
+}
+.quote figcaption strong { font-weight: 500; }
+.quote figcaption span { color: var(--muted); }
+
+@media (min-width: 820px) {
+  .quotes__grid { grid-template-columns: 1fr 1fr; gap: 52px; }
+}
+
+/* ---------- 9b. Carrusel de recomendaciones (React) ---------- */
+.carousel { display: block; }
+
+.carousel__stage {
+  border-top: 2px solid var(--ink);
+  padding-top: 30px;
+  /* Reserva de alto para que la página no salte al cambiar de cita */
+  min-height: 340px;
+}
+
+.carousel__card {
+  margin: 0;
+  animation: card-in .45s ease both;
+}
+@keyframes card-in {
+  from { opacity: 0; transform: translateY(14px); }
+  to   { opacity: 1; transform: none; }
+}
+
+.carousel__quote {
+  margin: 0 0 28px;
+  font-family: var(--display);
+  font-weight: 400;
+  font-size: clamp(20px, 2.9vw, 30px);
+  line-height: 1.42;
+  letter-spacing: -.012em;
+  max-width: 34ch;
+}
+.carousel__quote::before { content: "“"; color: var(--coral); }
+.carousel__quote::after  { content: "”"; color: var(--coral); }
+
+.carousel__who {
+  display: flex; flex-direction: column; gap: 4px;
+  font-family: var(--mono);
+  font-size: 12px; letter-spacing: .04em;
+}
+.carousel__who a {
+  text-decoration: none;
+  font-weight: 500;
+  border-bottom: 1px solid var(--coral);
+  align-self: flex-start;
+  padding-bottom: 1px;
+}
+.carousel__who a:hover { color: var(--coral); }
+.carousel__role { color: var(--ink); }
+.carousel__rel {
+  color: var(--muted);
+  font-size: 11px; letter-spacing: .08em; text-transform: uppercase;
+  margin-top: 2px;
+}
+
+/* --- Controles --- */
+.carousel__nav {
+  display: flex; align-items: center; gap: 18px;
+  margin-top: 36px;
+  padding-top: 22px;
+  border-top: 1px solid var(--line);
+}
+.carousel__count {
+  font-family: var(--mono);
+  font-variant-numeric: tabular-nums;
+  font-size: 12px; letter-spacing: .08em;
+}
+.carousel__count i { font-style: normal; color: var(--muted); margin: 0 2px; }
+
+.carousel__dots {
+  display: flex; align-items: center; gap: 8px;
+  margin-left: auto;
+}
+.carousel__dot {
+  width: 7px; height: 7px; padding: 0;
+  border: 0; border-radius: 50%;
+  background: var(--line);
+  cursor: pointer;
+  transition: background .2s ease, transform .2s ease;
+}
+.carousel__dot:hover { background: var(--muted); }
+.carousel__dot.is-active { background: var(--coral); transform: scale(1.35); }
+
+/* --- Flechas a los costados de la tarjeta --- */
+/* El marco es la referencia de posición de las flechas */
+.carousel__frame { position: relative; }
+
+/* En mobile no hay lugar al costado: van centradas debajo */
+.carousel__arrows {
+  display: flex; justify-content: center; gap: 12px;
+  margin-top: 22px;
+}
+
+/* Flecha pelada: solo el trazo, sin círculo ni fondo.
+   El botón conserva 46px de área táctil aunque no se vea. */
+.carousel__btn {
+  width: 46px; height: 46px;
+  display: grid; place-items: center;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--ink);
+  cursor: pointer;
+  transition: color .2s ease, transform .2s ease;
+}
+.carousel__btn svg {
+  width: 30px; height: 30px;
+  fill: none; stroke: currentColor; stroke-width: 1.25;
+  stroke-linecap: round; stroke-linejoin: round;
+}
+.carousel__btn:hover { color: var(--coral); }
+.carousel__btn--prev:hover { transform: translateX(-3px); }
+.carousel__btn--next:hover { transform: translateX(3px); }
+
+/* Desde tablet: una flecha a cada lado.
+   Reservamos una banda lateral de 84px dentro del carrusel para que
+   las flechas vivan ahí y nunca se monten sobre el texto. */
+@media (min-width: 900px) {
+  .carousel__frame,
+  .carousel__nav {
+    padding-left: 84px;
+    padding-right: 84px;
+  }
+
+  .carousel__arrows { margin-top: 0; }
+
+  .carousel__btn--prev,
+  .carousel__btn--next {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 2;
+    width: 56px; height: 56px;
+  }
+  .carousel__btn svg { width: 34px; height: 34px; }
+  .carousel__btn--prev { left: 0; }
+  .carousel__btn--next { right: 0; }
+
+  /* Al hacer hover se corren un poco hacia su lado */
+  .carousel__btn--prev:hover { transform: translate(-4px, -50%); }
+  .carousel__btn--next:hover { transform: translate(4px, -50%); }
+}
+
+@media (min-width: 820px) {
+  .carousel__stage { min-height: 300px; }
+  .carousel__quote { max-width: 40ch; }
+}
+
+/* ---------- 10. Contacto ---------- */
+.contact {
+  padding: var(--pad-y) var(--gutter);
+  background: var(--peach);
+}
+.contact__inner { max-width: var(--max); margin: 0 auto; }
+
+.contact__title {
+  font-family: var(--display);
+  font-weight: 600;
+  font-size: clamp(34px, 6vw, 60px);
+  line-height: 1.05;
+  letter-spacing: -.03em;
+  margin: 0 0 16px;
+}
+.contact__lead {
+  font-size: 18px;
+  max-width: 42ch;
+  margin: 0 0 32px;
+}
+
+.btn {
+  display: inline-block;
+  background: var(--coral);
+  color: #fff;
+  text-decoration: none;
+  font-family: var(--mono);
+  font-size: 13px; letter-spacing: .08em; text-transform: uppercase;
+  padding: 16px 30px;
+  border-radius: 999px;
+  transition: transform .18s ease, background .18s ease;
+}
+.btn:hover { background: var(--ink); transform: translateY(-2px); }
+
+.contact__list {
+  list-style: none; padding: 44px 0 0; margin: 0;
+  display: grid; gap: 22px;
+  border-top: 1px solid rgba(46, 38, 32, .15);
+  margin-top: 44px;
+}
+.contact__list li { display: flex; flex-direction: column; gap: 4px; }
+.contact__list .label { margin: 0; }
+.contact__list a {
+  text-decoration: none;
+  border-bottom: 1px solid var(--coral);
+  align-self: flex-start;
+  padding-bottom: 1px;
+}
+.contact__list a:hover { color: var(--coral); }
+
+@media (min-width: 768px) {
+  .contact__list { grid-template-columns: repeat(3, 1fr); gap: 28px; }
+}
+
+/* ---------- 11. Footer ---------- */
+.foot {
+  display: flex; justify-content: space-between; align-items: center;
+  gap: 16px; flex-wrap: wrap;
+  max-width: var(--max);
+  margin: 0 auto;
+  padding: 28px var(--gutter);
+  font-family: var(--mono);
+  font-size: 11.5px; letter-spacing: .06em;
+  color: var(--muted);
+}
+.foot a { text-decoration: none; }
+.foot a:hover { color: var(--ink); }
+
+/* ---------- 12. Animación ---------- */
+/* Estado inicial de los elementos que GSAP va a revelar.
+   Si el JS no carga, la clase .is-ready del <html> nunca se aplica
+   y todo se ve normal (sin quedar invisible). */
+.js-anim .js-hero,
+.js-anim .reveal > * { opacity: 0; }
+
+/* Respetar la preferencia del sistema: sin animación, todo visible */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .js-anim .js-hero,
+  .js-anim .reveal > * { opacity: 1; }
+  .btn:hover { transform: none; }
+
+  /* Las cintas dejan de moverse solas y se recorren a mano */
+  .band { overflow-x: auto; }
+  .band__track { animation: none; }
+  .band__list + .band__list { display: none; }
+
+  .brands__viewport { overflow-x: auto; -webkit-mask-image: none; mask-image: none; }
+  .brands__track { animation: none; }
+  .brands__list + .brands__list { display: none; }
+
+  /* El subrayado del nav aparece sin deslizarse */
+  .nav__links a::after { transition: none; }
+
+  /* El carrusel cambia de cita sin transición */
+  .carousel__card { animation: none; }
+}
+
+/* ---------- 13. Secciones más aireadas en pantallas grandes ---------- */
+@media (min-width: 768px)  { :root { --pad-y: 120px; --gutter: 40px; } }
+@media (min-width: 1200px) { :root { --pad-y: 152px; --gutter: 64px; } }

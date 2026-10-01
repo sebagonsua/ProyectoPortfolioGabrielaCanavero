@@ -1,0 +1,758 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<!-- ============================================================
+     SEO — editá el título y la descripción si querés
+     ============================================================ -->
+<title>Gabriela Canavero — Operations Manager eCommerce</title>
+<meta name="description" content="Portfolio de Gabriela Canavero, Operations Manager eCommerce y Marketing Digital en Montevideo. Más de 8 años gestionando canales digitales de punta a punta.">
+
+<!-- Open Graph (lo que se ve al compartir el link en LinkedIn / WhatsApp) -->
+<meta property="og:type" content="website">
+<meta property="og:title" content="Gabriela Canavero — Operations Manager eCommerce">
+<meta property="og:description" content="Más de 8 años gestionando canales digitales de punta a punta — de la estrategia comercial al detalle técnico.">
+<meta property="og:image" content="assets/og-image.jpg">
+<meta property="og:locale" content="es_UY">
+<meta name="theme-color" content="#FFFBF9">
+
+<!-- ============================================================
+     Tipografías (Google Fonts)
+     Fraunces = títulos · Inter = textos · IBM Plex Mono = números
+     ============================================================ -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=IBM+Plex+Mono:wght@400;500;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+<!-- Barra de progreso de scroll (línea coral arriba de todo) -->
+<div class="progress" aria-hidden="true"><span class="progress__bar" id="progressBar"></span></div>
+
+<a class="skip" href="#contacto">Ir a contacto</a>
+
+<!-- ============================================================
+     NAV — barra superior mínima
+     ============================================================ -->
+<header class="nav">
+  <a class="nav__name" href="#top">Gabriela Canavero</a>
+  <!-- El subrayado coral se mueve solo según la sección visible (ver script.js).
+       Cada href tiene que coincidir con el id de una sección. -->
+  <nav class="nav__links" aria-label="Secciones" data-scrollspy>
+    <a href="#casos">Casos</a>
+    <a href="#marcas">Marcas</a>
+    <a href="#testimonios">Testimonios</a>
+    <a href="#contacto" class="nav__cta">Contacto</a>
+  </nav>
+</header>
+
+<main id="top">
+
+<!-- ============================================================
+     1. HERO
+     ============================================================ -->
+<section class="hero">
+  <div class="hero__inner">
+
+    <p class="hero__eyebrow js-hero">
+      <span class="dot" aria-hidden="true"></span>
+      Montevideo, Uruguay · disponible para nuevos proyectos
+    </p>
+
+    <h1 class="hero__title js-hero">
+      Gabriela<br>Canavero
+    </h1>
+
+    <p class="hero__role js-hero">Operations Manager eCommerce · Marketing Digital</p>
+
+    <p class="hero__lead js-hero">
+      Más de 8 años gestionando canales digitales
+      <em>de punta a punta</em> — de la estrategia comercial
+      al detalle técnico.
+    </p>
+
+    <!-- Mini "línea de checkout": las tres plataformas/mundos que maneja -->
+    <ul class="hero__chips js-hero">
+      <li>VTEX</li>
+      <li>Funnel de conversión</li>
+      <li>Campañas &amp; presupuesto</li>
+    </ul>
+
+  </div>
+
+  <p class="hero__scroll js-hero" aria-hidden="true">Scrolleá para ver los casos</p>
+</section>
+
+<!-- ============================================================
+     CINTA DE HERRAMIENTAS — componente React (carrusel infinito)
+     El contenido de adentro es el respaldo estático: se ve si React
+     no llega a cargar. Apenas carga, React lo reemplaza.
+     La lista de herramientas se edita en el bloque JSX del final.
+     ============================================================ -->
+<section class="band" aria-label="Herramientas y plataformas">
+  <div id="tech-marquee">
+    <ul class="band__fallback">
+      <li>VTEX</li><li>Google Ads</li><li>Meta Ads</li><li>Google Analytics 4</li>
+      <li>Looker Studio</li><li>Mailchimp</li><li>Jira</li><li>Figma</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ============================================================
+     2. SOBRE ELLA
+     Para cambiar la foto: reemplazá assets/gabriela.jpg
+     ============================================================ -->
+<section class="about reveal" id="sobre">
+  <div class="about__grid">
+
+    <figure class="about__photo">
+      <img src="assets/gabriela.jpg" alt="Gabriela Canavero" loading="lazy" width="640" height="800">
+      <figcaption>Gabriela Canavero — Montevideo</figcaption>
+    </figure>
+
+    <div class="about__text">
+      <p class="label">Sobre mí</p>
+      <p class="about__body">
+        Con más de ocho años de experiencia como Manager eCommerce, aporto un enfoque
+        estratégico y operativo al desarrollo y gestión integral del canal digital.
+      </p>
+      <p class="about__body">
+        Mi misión es garantizar una experiencia de compra fluida y efectiva, alineando
+        las mejoras técnicas con los objetivos comerciales. Trabajo de forma directa con
+        equipos de desarrollo para implementar funcionalidades que impactan en la
+        experiencia de usuario y en la conversión.
+      </p>
+    </div>
+
+  </div>
+</section>
+
+<!-- ============================================================
+     3. CASOS — componente React (carrusel con flechas)
+     El contenido de cada caso se edita en la lista CASOS,
+     en el bloque de componentes del final del archivo.
+     ============================================================ -->
+<section class="cases reveal" id="casos">
+  <div class="cases__inner">
+
+    <div class="cases__head">
+      <p class="label">Casos</p>
+    </div>
+
+    <div id="cases-carousel">
+      <!-- Respaldo estático: se ve solo si React no carga -->
+      <div class="cases__fallback">
+        <article>
+          <p class="case__meta"><span class="case__co">Nespresso Uruguay</span><span class="case__dates">ene. 2024 — actualidad</span></p>
+          <h3 class="case__title">El puente entre el negocio y el código</h3>
+          <p class="case__lead">Operations Manager eCommerce. Punto de contacto principal entre negocio y equipo de desarrollo para definir e implementar funcionalidades en la tienda online.</p>
+        </article>
+        <article>
+          <p class="case__meta"><span class="case__co">Tienda Inglesa</span><span class="case__dates">2021 — 2023 · 3 años</span></p>
+          <h3 class="case__title">Un equipo, un presupuesto, todas las campañas</h3>
+          <p class="case__lead">Tres años y tres roles: de Analista comercial B2B a Analista Sr. de Marketing Digital, coordinando campañas para Tienda Inglesa, Tienda Volar, El País y los negocios B2B.</p>
+        </article>
+        <article>
+          <p class="case__meta"><span class="case__co">Servicios Digitales S.A. · Grupo Vierci — Paraguay</span><span class="case__dates">nov. 2017 — may. 2018</span></p>
+          <h3 class="case__title">El primer eCommerce del país</h3>
+          <p class="case__lead">Líder de Proyecto eCommerce. Condujo la creación del primer eCommerce de Paraguay, desde la planificación hasta el lanzamiento y la optimización posterior.</p>
+        </article>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ============================================================
+     TOTAL ACUMULADO — cierre de los tres casos
+     Funciona igual que las tarjetas de resultados: los números
+     con data-value cuentan solos al entrar en pantalla.
+     Para cargar un dato, mismo formato que en los casos:
+       <span class="metric__value total__value" data-value="12"></span>
+     ============================================================ -->
+<section class="total" aria-label="Total acumulado">
+  <div class="total__inner">
+
+    <div class="total__head">
+      <span class="receipt__label">Total acumulado</span>
+      <span class="receipt__ref">2017 — 2026</span>
+    </div>
+
+    <div class="total__grid">
+
+      <div class="total__item">
+        <span class="total__label">Años en eCommerce</span>
+        <span class="metric__value total__value" data-value="8" data-suffix="+"></span>
+      </div>
+
+      <div class="total__item">
+        <span class="total__label">Proyectos liderados</span>
+        <span class="metric__value total__value" data-value="14"></span>
+      </div>
+
+      <div class="total__item">
+        <span class="total__label">Lanzamientos end-to-end</span>
+        <!-- Ejemplo con dato: data-value="4.2" data-prefix="US$ " data-suffix=" M" data-decimals="1" -->
+        <span class="metric__value total__value" data-value="4"></span>
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+<!-- ============================================================
+     MARCAS — cinta infinita de logos
+     Funciona igual que la cinta de herramientas: la lista está
+     escrita dos veces y el riel se mueve un 50%, así el loop no
+     tiene costura. Los logos van en assets/logos/ (PNG con fondo
+     transparente). Si falta un archivo, el script lo reemplaza
+     por el nombre en texto — nunca queda un hueco roto.
+
+     PARA AGREGAR O SACAR UNA MARCA: editá las DOS listas de abajo,
+     tienen que quedar idénticas.
+     ============================================================ -->
+<section class="brands" id="marcas" aria-label="Marcas con las que trabajó">
+  <p class="label brands__label">Marcas con las que trabajé</p>
+
+  <div class="brands__viewport">
+    <div class="brands__track">
+
+      <!-- Copia 1 (la que leen los lectores de pantalla) -->
+      <ul class="brands__list">
+        <li class="brands__item"><img src="assets/logos/wevia.png"          alt="Wevia"          data-name="Wevia"          loading="lazy"></li>
+        <li class="brands__item"><img src="assets/logos/club-house.png"     alt="Club House"     data-name="Club House"     loading="lazy"></li>
+        <li class="brands__item"><img src="assets/logos/maria-pasion.png"   alt="María Pasión"   data-name="María Pasión"   loading="lazy"></li>
+        <li class="brands__item"><img src="assets/logos/el-dorado.png"      alt="El Dorado"      data-name="El Dorado"      loading="lazy"></li>
+        <li class="brands__item"><img src="assets/logos/tienda-volar.png"   alt="Tienda Volar"   data-name="Tienda Volar"   loading="lazy"></li>
+        <li class="brands__item"><img src="assets/logos/tienda-inglesa.png" alt="Tienda Inglesa" data-name="Tienda Inglesa" loading="lazy"></li>
+        <li class="brands__item"><img src="assets/logos/nespresso.png"      alt="Nespresso"      data-name="Nespresso"      loading="lazy"></li>
+      </ul>
+
+      <!-- Copia 2 (solo visual, no se lee dos veces) -->
+      <ul class="brands__list" aria-hidden="true">
+        <li class="brands__item"><img src="assets/logos/wevia.png"          alt="" data-name="Wevia"          loading="lazy"></li>
+        <li class="brands__item"><img src="assets/logos/club-house.png"     alt="" data-name="Club House"     loading="lazy"></li>
+        <li class="brands__item"><img src="assets/logos/maria-pasion.png"   alt="" data-name="María Pasión"   loading="lazy"></li>
+        <li class="brands__item"><img src="assets/logos/el-dorado.png"      alt="" data-name="El Dorado"      loading="lazy"></li>
+        <li class="brands__item"><img src="assets/logos/tienda-volar.png"   alt="" data-name="Tienda Volar"   loading="lazy"></li>
+        <li class="brands__item"><img src="assets/logos/tienda-inglesa.png" alt="" data-name="Tienda Inglesa" loading="lazy"></li>
+        <li class="brands__item"><img src="assets/logos/nespresso.png"      alt="" data-name="Nespresso"      loading="lazy"></li>
+      </ul>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     4. RECOMENDACIONES — componente React (carrusel con flechas)
+     El texto de cada recomendación se edita en el bloque JSX
+     del final del archivo, en la lista RECOMENDACIONES.
+     Lo que está acá adentro es el respaldo estático sin React.
+     ============================================================ -->
+<section class="quotes" id="testimonios">
+  <div class="quotes__head">
+    <p class="label">Recomendaciones</p>
+    <p class="quotes__source">Recibidas en LinkedIn, octubre 2023</p>
+  </div>
+
+  <div id="testimonial-carousel">
+    <div class="quotes__grid">
+      <figure class="quote">
+        <blockquote>Lideró campañas excelentes, caracterizadas por planificaciones integrales, piezas gráficas atractivas y muy buenos resultados.</blockquote>
+        <figcaption><strong>Cecilia Negreyra</strong><span>Licenciada en Comunicación</span></figcaption>
+      </figure>
+      <figure class="quote">
+        <blockquote>Gabriela es una excelente profesional, responsable y dedicada a su trabajo.</blockquote>
+        <figcaption><strong>María Eugenia Herrmann Arburúas</strong><span>Licenciada en Comunicación</span></figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     5. CONTACTO — sección estática, sin animación
+     Cambiá el mail en los dos lugares donde aparece.
+     ============================================================ -->
+<section class="contact" id="contacto">
+  <div class="contact__inner">
+    <p class="label">Contacto</p>
+    <h2 class="contact__title">¿Trabajamos juntos?</h2>
+    <p class="contact__lead">
+      Escribime y te respondo con disponibilidad y una propuesta de próximos pasos.
+    </p>
+
+    <a class="btn" href="mailto:gacamaida@gmail.com">Escribir un mail</a>
+
+    <ul class="contact__list">
+      <li>
+        <span class="label">Mail</span>
+        <a href="mailto:gacamaida@gmail.com">gacamaida@gmail.com</a>
+      </li>
+      <li>
+        <span class="label">Teléfono</span>
+        <a href="tel:+59899442793">099 442 793</a>
+      </li>
+      <li>
+        <span class="label">LinkedIn</span>
+        <a href="https://www.linkedin.com/in/gabriela-canavero-1a85147a/" target="_blank" rel="noopener">/in/gabriela-canavero</a>
+      </li>
+      <li>
+        <span class="label">Ubicación</span>
+        <span>Montevideo, Uruguay</span>
+      </li>
+    </ul>
+  </div>
+</section>
+
+</main>
+
+<footer class="foot">
+  <span>© <span id="year">2026</span> Gabriela Canavero</span>
+  <a href="#top">Volver arriba</a>
+</footer>
+
+<!-- GSAP + ScrollTrigger por CDN (animaciones de scroll) -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="script.js"></script>
+
+<!-- React por CDN. Babel compila el JSX en el navegador, así el sitio
+     sigue abriéndose con doble clic y sin instalar nada. -->
+<script src="https://unpkg.com/react@18/umd/react.production.min.js" crossorigin></script>
+<script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js" crossorigin></script>
+<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+<!-- ============================================================
+     COMPONENTES REACT
+     Acá viven las dos piezas interactivas del sitio:
+       · TechMarquee  — la cinta infinita de herramientas
+       · Recomendaciones — el carrusel con flechas
+     Para editar contenido, tocá solo las dos listas de acá abajo.
+     ============================================================ -->
+<script type="text/babel">
+
+  const { useState, useCallback, useEffect, useRef } = React;
+
+  const HERRAMIENTAS = [
+    "VTEX",
+    "Shopify",
+    "Fenicio",
+    "Google Analytics",
+    "SEO",
+    "SEM",
+    "Marketing Digital",
+    "Social Media",
+    "Amazon Services",
+    "Mercado Libre",
+  ];
+
+  /* ----------------------------------------------------------
+     DATOS 2 · Casos / experiencias
+     Cada métrica: valor null = sale como chip "pendiente".
+     Con número, se anima al entrar. Opcionales: prefijo,
+     sufijo, decimales, confirmado.
+     ---------------------------------------------------------- */
+  const CASOS = [
+    {
+      empresa: "Nespresso Uruguay",
+      fechas: "ene. 2024 — actualidad",
+      titulo: "El puente entre el negocio y el código",
+      lead:
+        "Operations Manager eCommerce. Punto de contacto principal entre negocio y equipo de desarrollo para definir e implementar funcionalidades en la tienda online.",
+      acciones: [
+        "Gestión integral de la plataforma VTEX: configuraciones, testeos, carga de productos y coordinación de releases.",
+        "Traducción de necesidades comerciales en requerimientos técnicos accionables para desarrollo.",
+        "Colaboración constante con marketing, comercial y administración para optimizar el funnel de conversión.",
+      ],
+      ref: "VTEX · UY",
+      periodo: "2024 — hoy",
+      metricas: [
+        { label: "Mejora en conversión (%)", valor: 2},
+        { label: "Tiempo medio de resolución de incidencias (horas)", valor: 1},
+      ],
+    },
+    {
+      empresa: "Tienda Inglesa",
+      fechas: "2021 — 2023 · 3 años",
+      titulo: "Un equipo, un presupuesto, todas las campañas",
+      lead:
+        "Tres años y tres roles: de Analista comercial B2B a Analista Sr. de Marketing Digital, coordinando campañas para Tienda Inglesa, Tienda Volar, El País y los negocios B2B.",
+      acciones: [
+        "Coordinación de todos los materiales digitales de la web, con contacto directo con las agencias de diseño y publicidad.",
+        "Equipo de marketing digital a cargo: community manager, diseñador gráfico y creadora de contenido, más agencia.",
+        "Planificación y gestión del presupuesto anual del área, con seguimiento de KPIs, ROI y rendimiento de campañas.",
+        "Definición de estrategias junto a comercial, con métricas de éxito acordadas antes de ejecutar.",
+      ],
+      ref: "B2C + B2B",
+      periodo: "2021 — 2023",
+      metricas: [
+        { label: "Campañas lideradas", valor: 50 },
+        { label: "ROAS promedio", valor: 4 },
+        { label: "Equipo a cargo", valor: 3, sufijo: " + agencia"},
+      ],
+    },
+    {
+      empresa: "Servicios Digitales S.A. · Grupo Vierci — Paraguay",
+      fechas: "nov. 2017 — may. 2018",
+      titulo: "El primer eCommerce del país",
+      lead:
+        "Líder de Proyecto eCommerce. Condujo la creación del primer eCommerce de Paraguay, desde la planificación hasta el lanzamiento y la optimización posterior.",
+      acciones: [
+        "Administración integral del backend en VTEX.",
+        "Coordinación de las etapas de planificación, desarrollo, lanzamiento y mejora continua.",
+        "Gestión simultánea de una cartera de 8 clientes clave, entre ellos Forever 21.",
+      ],
+      ref: "VTEX · PY",
+      periodo: "2017 — 2018",
+      metricas: [
+        { label: "Clientes en simultáneo", valor: 8},
+        { label: "Meses hasta el lanzamiento", valor: 4 },
+      ],
+    },
+  ];
+
+  /* ----------------------------------------------------------
+     DATOS 3 · Recomendaciones de LinkedIn
+     Orden = orden en que aparecen en el carrusel.
+     ---------------------------------------------------------- */
+  const RECOMENDACIONES = [
+    {
+      texto:
+        "Trabajé con Gabi durante cinco meses en el equipo de marketing ecommerce de Tienda Inglesa. Lideró campañas excelentes, caracterizadas por planificaciones integrales, piezas gráficas atractivas y muy buenos resultados. Fue un gran apoyo en el trabajo diario, siempre abierta a escuchar nuevas sugerencias y siempre respaldándome cuando hacía falta. Sin duda, una gran supervisora con la que aprendí mucho.",
+      nombre: "Cecilia Negreyra",
+      cargo: "Licenciada en Comunicación",
+      relacion: "Gabriela supervisaba a Cecilia",
+      fecha: "Octubre 2023",
+      url: "https://www.linkedin.com/in/cecilia-negreyra-a654b715a/",
+    },
+    {
+      texto:
+        "Gabriela es una excelente profesional, responsable y dedicada a su trabajo. Está siempre enfocada en obtener los mejores resultados. Como jefa me escuchó y supo comprender mis dificultades en el camino, al mismo tiempo que nunca dejó de motivarme a continuar aprendiendo y desafiar mis capacidades al máximo.",
+      nombre: "María Eugenia Herrmann Arburúas",
+      cargo: "Licenciada en Comunicación",
+      relacion: "Gabriela supervisaba a María Eugenia",
+      fecha: "Octubre 2023",
+      url: "https://www.linkedin.com/in/mar%C3%ADa-eugenia-herrmann-arbur%C3%BAas-6b140918a/",
+    },
+    {
+      texto:
+        "Gabriela es una excelente profesional en el área de e-commerce. Pudimos trabajar juntas casi un año y realmente fue un placer contar con su apoyo y disposición en las distintas tareas que se nos asignaban cada día; así como también es muy capaz a la hora de resolver inconvenientes e imprevistos que se presenten.",
+      nombre: "Noelia Gilmes",
+      cargo: "Senior Creative & Copywriter · Co-founder de Prima, Estudio Creativo",
+      relacion: "Trabajaron juntas en equipos distintos",
+      fecha: "Octubre 2023",
+      url: "https://www.linkedin.com/in/noelia-gilmes-62038a101/",
+    },
+    {
+      texto:
+        "Tuve el gusto de poder trabajar con Gabriela, quiero destacar su buen compañerismo. En el día a día siempre mostró su compromiso, actitud y una genial habilidad para resolver problemas y proponer soluciones.",
+      nombre: "Lucas González",
+      cargo: "Lic. en Gerencia y Administración de Empresas",
+      relacion: "Trabajaron juntos en equipos distintos",
+      fecha: "Octubre 2023",
+      url: "https://www.linkedin.com/in/lucas-gonz%C3%A1lez7/",
+    },
+  ];
+
+
+  /* ==========================================================
+     COMPONENTE 1 · Cinta infinita de herramientas
+     Truco: renderizamos la misma lista dos veces y movemos el
+     riel un 50%. Cuando la primera copia sale, la segunda ya
+     está en su lugar, así que el loop no tiene costura.
+     ========================================================== */
+  function TechMarquee({ items }) {
+    const Grupo = ({ oculto }) => (
+      <ul className="band__list" aria-hidden={oculto || undefined}>
+        {items.map((item) => (
+          <li className="band__item" key={item}>{item}</li>
+        ))}
+      </ul>
+    );
+
+    return (
+      <div className="band__track">
+        <Grupo />
+        <Grupo oculto />
+      </div>
+    );
+  }
+
+
+  /* ==========================================================
+     PIEZAS COMPARTIDAS
+     Los dos carruseles usan los mismos controles y el mismo
+     manejo de teclado y swipe.
+     ========================================================== */
+
+  const SIN_MOVIMIENTO = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  // Hook: devuelve [ref, visible] — visible pasa a true la primera
+  // vez que el elemento entra en pantalla.
+  function useVisible() {
+    const ref = useRef(null);
+    const [visible, setVisible] = useState(false);
+    useEffect(() => {
+      if (!ref.current || typeof IntersectionObserver === "undefined") {
+        setVisible(true);
+        return;
+      }
+      const obs = new IntersectionObserver(
+        (entradas) => {
+          if (entradas[0].isIntersecting) { setVisible(true); obs.disconnect(); }
+        },
+        { threshold: 0.25 }
+      );
+      obs.observe(ref.current);
+      return () => obs.disconnect();
+    }, []);
+    return [ref, visible];
+  }
+
+  // Hook: navegación con índice, flechas de teclado y swipe táctil
+  function useCarrusel(largo) {
+    const [indice, setIndice] = useState(0);
+    const tactil = useRef(null);
+    const mover = useCallback(
+      (paso) => setIndice((i) => (i + paso + largo) % largo),
+      [largo]
+    );
+    const props = {
+      onKeyDown: (e) => {
+        if (e.key === "ArrowLeft")  { e.preventDefault(); mover(-1); }
+        if (e.key === "ArrowRight") { e.preventDefault(); mover(1); }
+      },
+      onTouchStart: (e) => { tactil.current = e.touches[0].clientX; },
+      onTouchEnd: (e) => {
+        if (tactil.current === null) return;
+        const dif = tactil.current - e.changedTouches[0].clientX;
+        if (Math.abs(dif) > 45) mover(dif > 0 ? 1 : -1);
+        tactil.current = null;
+      },
+    };
+    return { indice, setIndice, mover, props };
+  }
+
+  // Flechas: se ubican a los costados de la tarjeta (ver styles.css)
+  function Flechas({ mover, etiqueta }) {
+    return (
+      <div className="carousel__arrows">
+        <button
+          className="carousel__btn carousel__btn--prev"
+          onClick={() => mover(-1)}
+          aria-label={"Ver " + etiqueta + " anterior"}
+        >
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg>
+        </button>
+        <button
+          className="carousel__btn carousel__btn--next"
+          onClick={() => mover(1)}
+          aria-label={"Ver " + etiqueta + " siguiente"}
+        >
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg>
+        </button>
+      </div>
+    );
+  }
+
+  // Contador + puntos, debajo de la tarjeta
+  function Controles({ indice, total, setIndice, etiqueta }) {
+    const num = (n) => String(n).padStart(2, "0");
+    return (
+      <div className="carousel__nav">
+        <span className="carousel__count">
+          {num(indice + 1)} <i>/</i> {num(total)}
+        </span>
+
+        <div className="carousel__dots">
+          {Array.from({ length: total }, (_, i) => (
+            <button
+              key={i}
+              className={"carousel__dot" + (i === indice ? " is-active" : "")}
+              onClick={() => setIndice(i)}
+              aria-label={"Ver " + etiqueta + " " + (i + 1)}
+              aria-current={i === indice || undefined}
+            />
+          ))}
+        </div>
+      </div>
+    );
+  }
+
+
+  /* ==========================================================
+     COMPONENTE 2 · Métrica que cuenta desde 0
+     Se dispara cuando la tarjeta está visible, y otra vez cada
+     vez que el carrusel cambia de caso.
+     ========================================================== */
+  function Metrica({ dato, activo }) {
+    const [n, setN] = useState(0);
+
+    useEffect(() => {
+      if (dato.valor === null || !activo) return;
+      if (SIN_MOVIMIENTO) { setN(dato.valor); return; }
+
+      let raf, inicio = null;
+      const duracion = 1000;
+      const paso = (t) => {
+        if (inicio === null) inicio = t;
+        const avance = Math.min((t - inicio) / duracion, 1);
+        const suave = 1 - Math.pow(1 - avance, 3);   // desacelera al final
+        setN(dato.valor * suave);
+        if (avance < 1) raf = requestAnimationFrame(paso);
+      };
+      raf = requestAnimationFrame(paso);
+      return () => cancelAnimationFrame(raf);
+    }, [dato, activo]);
+
+    return (
+      <li className="metric">
+        <span className="metric__label">
+          {dato.label}
+          {dato.confirmado && <span className="tag">confirmado</span>}
+        </span>
+        {dato.valor === null ? (
+          <span className="metric__value metric__value--pending">pendiente</span>
+        ) : (
+          <span className="metric__value">
+            {(dato.prefijo || "") + n.toFixed(dato.decimales || 0) + (dato.sufijo || "")}
+          </span>
+        )}
+      </li>
+    );
+  }
+
+
+  /* ==========================================================
+     COMPONENTE 3 · Carrusel de casos
+     ========================================================== */
+  function Casos({ items }) {
+    const { indice, setIndice, mover, props } = useCarrusel(items.length);
+    const [ref, visible] = useVisible();
+    const caso = items[indice];
+
+    return (
+      <div className="carousel" ref={ref} {...props}>
+        <div className="carousel__frame">
+        <article className="ccard" key={indice}>
+          <div className="ccard__grid">
+
+            <div className="case__story">
+              <p className="case__meta">
+                <span className="case__co">{caso.empresa}</span>
+                <span className="case__dates">{caso.fechas}</span>
+              </p>
+              <h3 className="case__title">{caso.titulo}</h3>
+              <p className="case__lead">{caso.lead}</p>
+              <ul className="case__actions">
+                {caso.acciones.map((a) => <li key={a}>{a}</li>)}
+              </ul>
+            </div>
+
+            <aside className="receipt" aria-label={"Resumen de resultados — " + caso.empresa}>
+              <div className="receipt__head">
+                <span className="receipt__label">Resumen de resultados</span>
+                <span className="receipt__ref">{caso.ref}</span>
+              </div>
+              <ul className="receipt__items">
+                {caso.metricas.map((m) => (
+                  <Metrica key={indice + m.label} dato={m} activo={visible} />
+                ))}
+              </ul>
+              <div className="receipt__rule" aria-hidden="true"></div>
+              <div className="receipt__foot">
+                <span>Período</span>
+                <span className="mono">{caso.periodo}</span>
+              </div>
+            </aside>
+
+          </div>
+        </article>
+
+        <Flechas mover={mover} etiqueta="caso" />
+        </div>
+
+        <Controles
+          indice={indice}
+          total={items.length}
+          setIndice={setIndice}
+          etiqueta="caso"
+        />
+      </div>
+    );
+  }
+
+
+  /* ==========================================================
+     COMPONENTE 4 · Carrusel de recomendaciones
+     Flechas, puntos, teclado (← →) y swipe en mobile.
+     ========================================================== */
+  function Recomendaciones({ items }) {
+    const { indice, setIndice, mover, props } = useCarrusel(items.length);
+    const r = items[indice];
+
+    return (
+      <div className="carousel" {...props}>
+        <div className="carousel__frame">
+        <div className="carousel__stage" aria-live="polite">
+          {/* key={indice} reinicia la animación de entrada en cada cambio */}
+          <figure className="carousel__card" key={indice}>
+            <blockquote className="carousel__quote">{r.texto}</blockquote>
+            <figcaption className="carousel__who">
+              <a href={r.url} target="_blank" rel="noopener noreferrer">
+                {r.nombre}
+              </a>
+              <span className="carousel__role">{r.cargo}</span>
+              <span className="carousel__rel">{r.relacion} · {r.fecha}</span>
+            </figcaption>
+          </figure>
+        </div>
+
+        <Flechas mover={mover} etiqueta="recomendación" />
+        </div>
+
+        <Controles
+          indice={indice}
+          total={items.length}
+          setIndice={setIndice}
+          etiqueta="recomendación"
+        />
+      </div>
+    );
+  }
+
+
+  /* ==========================================================
+     Montaje: React reemplaza el contenido estático de respaldo
+     ========================================================== */
+  const cinta = document.getElementById("tech-marquee");
+  if (cinta) {
+    ReactDOM.createRoot(cinta).render(<TechMarquee items={HERRAMIENTAS} />);
+  }
+
+  const casos = document.getElementById("cases-carousel");
+  if (casos) {
+    ReactDOM.createRoot(casos).render(<Casos items={CASOS} />);
+  }
+
+  const recos = document.getElementById("testimonial-carousel");
+  if (recos) {
+    ReactDOM.createRoot(recos).render(<Recomendaciones items={RECOMENDACIONES} />);
+  }
+
+  // El alto de la página cambió al montar React: recalculamos los
+  // disparadores de scroll para que las secciones aparezcan a tiempo.
+  if (window.ScrollTrigger) {
+    setTimeout(() => window.ScrollTrigger.refresh(), 120);
+  }
+
+</script>
+
+</body>
+</html>

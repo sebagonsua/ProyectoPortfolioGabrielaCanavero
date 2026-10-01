@@ -1,0 +1,21 @@
+CARPETA DE IMAGENES
+===================
+
+Pone aca los archivos que usa el sitio. Los nombres importan:
+
+1. gabriela.jpg
+   Foto profesional de la seccion "Sobre mi". YA ESTA PUESTA.
+   Formato vertical (4:5). Ideal: 800 x 1000 px, menos de 300 KB.
+
+2. og-image.jpg
+   Imagen que se ve cuando compartis el link en LinkedIn o WhatsApp.
+   Horizontal, 1200 x 630 px.
+
+3. logos/
+   Carpeta con los logos de las marcas (la cinta que corre).
+   Ver el LEEME.txt que esta adentro.
+
+Si cambias los nombres de archivo, actualiza tambien las rutas en index.html
+(busca "assets/" y vas a encontrar los lugares).
+
+Para achicar el peso de las fotos sin instalar nada: squoosh.app
